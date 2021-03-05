@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<script>
+
+let matchOutcome;
+let playerSelection = "rock";
+let computerSelection = computerPlay();
+//console.log(playRound(playerSelection, computerSelection));
+
+
+//the computer makes its selection
+function computerPlay(){
+//assign Rock, Paper, and Scissors to a number
+let rock = 1;
+let paper = 2;
+let scissors = 3;
+
+//computer generates random number between 1 and 3
+let randomNum = (Math.floor(Math.random() * 3) + 1);
+
+//return computer's selection based on random number generated
+let computerSelection;
+
+    if (randomNum == rock)               //if randomNum picks rock, return rock
+    {
+        computerSelection = "rock";
+        return computerSelection;
+    }
+    else if (randomNum == paper){        //if randomNum picks paper, return paper
+        computerSelection = "paper";
+        return computerSelection;      
+    }
+    else if (randomNum == scissors){                               //if not rock or paper, return scissors
+        computerSelection = "scissors";
+        return computerSelection;
+    }
+}
+
+//plays the actual game of rock, paper, scissors
+function playRound(playerSelection, computerSelection){
+
+    //string declaration for the outcome text
+
+    //makes player selection all lower case so we can compare later
+    playerSelection = playerSelection.toLowerCase(); 
+
+    //if computer and player have same picks, declare a tie
+    if (playerSelection == computerSelection){
+        
+        matchOutcome = "tie";
+        return matchOutcome;
+    }
+    
+    //if player picks rock, catelog the possible results
+    if (playerSelection == "rock"){
+
+        if (computerSelection == "paper"){
+
+            matchOutcome = "lose";
+            return matchOutcome;
+        }
+
+        else{
+
+            matchOutcome = "win";
+            return matchOutcome;
+        }
+    }
+
+    //if player picks paper, catelog the possible results
+    if (playerSelection == "paper")
+    {
+
+        if (computerSelection == "rock"){
+            
+            matchOutcome = "win";
+            return matchOutcome;
+        }
+
+        else{
+            
+            matchOutcome = "lose";
+            return matchOutcome;
+        }
+    }
+
+    //if player picks scissors, catelog the possible results
+
+    if (playerSelection == "scissors")
+    {
+
+        if (computerSelection == "rock"){
+            
+            matchOutcome = "lose";
+            return matchOutcome;
+        }
+
+        else{
+
+            matchOutcome = "win";
+            return matchOutcome;
+        }
+    }
+
+}
+
+//make function to play a 5 round game that keeps score
+function game(){
+
+    //declare variables we'll need to keep score
+    let computerScore = 0;
+    let playerScore = 0;
+
+    //loop playing a game 5 times
+    for(let gameCount = 1; gameCount <= 5; gameCount++){
+        computerSelection = computerPlay();
+
+        playerSelection = window.prompt("Rock, Paper, or Scissors?");
+        playerSelection = playerSelection.toLowerCase();
+
+
+
+        playRound(playerSelection, computerSelection);
+        console.log(playerSelection, computerSelection);
+        
+        //adds to score based on who plays
+        if (matchOutcome == "win"){
+            playerScore++;
+            console.log("You won game " + gameCount + "!");
+        }
+        else if (matchOutcome == "tie"){
+            playerScore++;
+            computerScore++;
+            console.log("Game " + gameCount + " " + "was a tie!");
+        }
+        else{
+            computerScore++;
+            console.log("You lost game " + gameCount + ".");
+        }
+
+
+    }
+
+    //Prints who is the winner
+    if (playerScore > computerScore){
+        console.log("Congratulations!  You won the match!");
+    }
+    else if (playerScore == computerScore){
+        console.log("It's a tie!");
+    }
+    else{
+        console.log("That's too bad.  You lost the match!");
+    }
+
+
+}
+
+game();
+
+
+
+</script>
+
+</body>
+
+
+
+</html>
